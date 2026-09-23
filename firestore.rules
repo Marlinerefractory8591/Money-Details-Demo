@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // --- HELPERS ---
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(userId) { return isSignedIn() && request.auth.uid == userId; }
+    
+    // Admins are explicitly allowlisted in /admins/{uid}.
+    // Never hard-code a production email into a public demo repository.
+    function isAdmin() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    
+    // Blocked Status Check
+    // We check if the user is blocked. Admins are exempt.
+    function isNotBlocked() {
+      return !isSignedIn() || isAdmin() || !exists(/databases/$(database)/documents/users/$(request.auth.uid)) || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('status', 'active') != 'blocked';
+    }
+
+    // Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- COLLECTIONS ---
+
+    // Admins helper collection
+    match /admins/{uid} {
+      allow read: if isOwner(uid) || isAdmin();
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      // User can read/write their own profile, Admin can access all
+      allow read: if (isOwner(userId) || isAdmin()) && isNotBlocked();
+      allow write: if (isOwner(userId) || isAdmin()) && isNotBlocked();
+      
+      // Subcollections
+      match /transactions/{id} {
+        allow read, write: if (isOwner(userId) || isAdmin()) && isNotBlocked();
+      }
+      match /udhaar/{id} {
+        allow read, write: if (isOwner(userId) || isAdmin()) && isNotBlocked();
+      }
+      match /notifications/{id} {
+        allow read, write: if (isOwner(userId) || isAdmin()) && isNotBlocked();
+      }
+      match /college_fees/{id} {
+        allow read, write: if (isOwner(userId) || isAdmin()) && isNotBlocked();
+      }
+      match /collegeFees/{id} { // Unified naming if needed
+        allow read, write: if (isOwner(userId) || isAdmin()) && isNotBlocked();
+      }
+      match /categories/{id} {
+        allow read, write: if (isOwner(userId) || isAdmin()) && isNotBlocked();
+      }
+      match /budgets/{id} {
+        allow read, write: if (isOwner(userId) || isAdmin()) && isNotBlocked();
+      }
+    }
+
+    // Admin Logs (Only Admin can read/write)
+    match /adminLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+    }
+
+    // --- COLLECTION GROUPS ---
+    // Allow admin to perform global analytics
+    match /{path=**}/transactions/{id} {
+      allow list: if isAdmin();
+    }
+    match /{path=**}/udhaar/{id} {
+      allow list: if isAdmin();
+    }
+    match /{path=**}/collegeFees/{id} {
+      allow list: if isAdmin();
+    }
+    match /{path=**}/college_fees/{id} {
+      allow list: if isAdmin();
+    }
+  }
+}

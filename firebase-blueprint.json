@@ -1,0 +1,101 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "fullName": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "mobile": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Financial transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["Income", "Expense"] },
+        "category": { "type": "string" },
+        "note": { "type": "string" },
+        "date": { "type": "string" },
+        "paymentMode": { "type": "string", "enum": ["Cash", "UPI", "Bank", "Card", "Other"] },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "amount", "type", "date", "paymentMode", "userId"]
+    },
+    "UdhaarEntry": {
+      "title": "UdhaarEntry",
+      "description": "Lend or borrow entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "personName": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["You Gave", "You Got"] },
+        "paymentMode": { "type": "string", "enum": ["Cash", "UPI", "Bank", "Card", "Other"] },
+        "note": { "type": "string" },
+        "date": { "type": "string" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "personName", "amount", "type", "date", "paymentMode", "userId"]
+    },
+    "CollegeFee": {
+      "title": "CollegeFee",
+      "description": "College fee payment",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "collegeName": { "type": "string" },
+        "paymentType": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" },
+        "paymentMode": { "type": "string", "enum": ["Cash", "UPI", "Bank", "Card", "Other"] },
+        "paymentSource": { "type": "string", "enum": ["Self", "Family", "Loan", "Scholarship", "Other"] },
+        "note": { "type": "string" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "collegeName", "paymentType", "amount", "date", "paymentMode", "paymentSource", "userId"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "User's custom category",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "isCustom": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "type", "isCustom"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data"
+    },
+    "/users/{userId}/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "User's custom categories"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "User's financial transactions"
+    },
+    "/users/{userId}/udhaarEntries/{entryId}": {
+      "schema": "UdhaarEntry",
+      "description": "User's lend/borrow entries"
+    },
+    "/users/{userId}/collegeFees/{feeId}": {
+      "schema": "CollegeFee",
+      "description": "User's college fee payments"
+    }
+  }
+}
